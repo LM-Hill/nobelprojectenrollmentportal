@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'survey_app/css/bootstrap.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/style2.css' %}">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caregiver Interest Survey</title>
+</head>
+<body>
+    <nav class="navbar navbar-light bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">STEM IL Nobel Project</a>
+        </div>
+    </nav>
+    <div class="container">
+        <h3>Interest form for: {{caregiver.name}}</h3>
+        {% for message in messages%}
+            <ul>
+                <li>{{message}}</li>
+            </ul>
+        {% endfor %}
+        <form action="/survey/{{participant.id}}/{{caregiver.id}}/create_caregiver_interest" method="POST">
+            {% csrf_token %}
+            <label for="cexp">What would this caregiver like for their child to get out of the program?</label><br>
+            <textarea name="caregiver_expectation" id="cexp" cols="60" rows="6"></textarea><br>
+
+            <label for="cdreams">What is this caregiver's dream career?</label><br>
+            <textarea name="caregiver_dream_career" id="cdreams" cols="60" rows="6"></textarea><br><br>
+
+            Does this caregiver currently have their dream career?<br>
+            <input type="radio" name="career" id="yes" value="Yes">
+            <label for="yes">Yes</label><br>
+            <input type="radio" name="career" id="no" value="No">
+            <label for="no">No</label><br><br>
+
+            <label for="cgoals">List three goals that this caregiver has for their future.</label><br>
+            <textarea name="caregiver_goals" id="cgoals" cols="60" rows="6"></textarea><br><br>
+
+            <input type="submit"    value = "Submit">
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'survey_app/css/bootstrap.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/style2.css' %}">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consent Form</title>
+</head>
+<body>
+    <nav class="navbar navbar-light bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">STEM IL Nobel Project</a>
+        </div>
+    </nav>
+    <div class="container">
+        <div id="enrollform">
+            <iframe src="/static/survey_app/Final-IRB_Consent_Computer Science Pipeline 11.12.20.pdf" width="100%" height="900px"></iframe>
+        </div>
+        <div id="enrollquestions">
+            <h5>Consent Form for: {{caregiver.name}}</h5>
+            <p style="color: blue">Please read the IRB Consent form in the panel to your left and respond to the questions on page 3 using the options below.</p>
+            {% for message in messages %}
+                <ul>
+                    <li>{{message}}</li>
+                </ul>
+            {% endfor %}
+            <form action="/survey/{{participant.id}}/{{caregiver.id}}/create_consent_form" method="POST">
+                {% csrf_token %}
+                <div class="form-group row">
+                    <label for="q1">1. Can you tell me what we are asking you to do?</label><br>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="consentq1" id="q1" placeholder="Please provide response"><br>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="q2">2. Can you tell me what the risks are for this study?</label><br>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="consentq2" id="q2" placeholder="Please provide response"><br>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="q3">3. Can you tell me what the benefits are for this study?</label><br>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="consentq3" id="q3" placeholder="Please provide response"><br>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="q4">4. Do you have other questions about any information that may not be clear?</label><br>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="consentq4" id="q4" placeholder="Please provide response"><br>
+                    </div>
+                </div>
+                
+                5. I give permission for my interview to be video recorded.<br>
+                <input type="radio" name="cvideo" id="yes1" value="Yes">
+                <label for="yes1">Yes</label>
+                <input type="radio" name="cvideo" id="no1" value="No">
+                <label for="no1">No</label><br><br>
+                
+                6. I give permission for my interview to be audio recorded.<br>
+                <input type="radio" name="caudio" id="yes2" value="Yes">
+                <label for="yes2">Yes</label>
+                <input type="radio" name="caudio" id="no2" value="No">
+                <label for="no2">No</label><br><br>
+                
+                7. I give permission to have pictures and video taken inside and outside of my house.<br>
+                <input type="radio" name="cvideohouse" id="yes3" value="Yes">
+                <label for="yes3">Yes</label>
+                <input type="radio" name="cvideohouse" id="no3" value="No">
+                <label for="no3">No</label><br><br>
+
+                8. I give permission to have pictures and video taken inside my child(ren)'s room.<br>
+                <input type="radio" name="cvideoroom" id="yes4" value="Yes">
+                <label for="yes4">Yes</label>
+                <input type="radio" name="cvideoroom" id="no4" value="No">
+                <label for="no4">No</label><br><br>
+
+                9. I give permission to have pictures and video taken of pictures of me and my child(ren).<br>
+                <input type="radio" name="cvideome" id="yes8" value="Yes">
+                <label for="yes8">Yes</label>
+                <input type="radio" name="cvideome" id="no8" value="No">
+                <label for="no8">No</label><br><br>
+                
+                10. I give permission to have pictures and video taken of items belonging to me and my child(ren).<br>
+                <input type="radio" name="cvideocontents" id="yes9" value="Yes">
+                <label for="yes9">Yes</label>
+                <input type="radio" name="cvideocontents" id="no9" value="No">
+                <label for="no9">No</label><br><br>
+                
+                11. I give permission to be contacted in the future regarding this and other research.<br>
+                <input type="radio" name="cfuture" id="yes10" value="Yes">
+                <label for="yes10">Yes</label>
+                <input type="radio" name="cfuture" id="no10" value="No">
+                <label for="no10">No</label><br><br>
+
+                <input type="hidden" name="csign" id="csign" value="{{caregiver.name}}">
+                
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'survey_app/css/bootstrap.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/style2.css' %}">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caregiver Demographics Questionnaire </title>
+</head>
+<body>
+    <nav class="navbar navbar-light bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">STEM IL Nobel Project</a>
+        </div>
+    </nav>
+    <h3>Demographics Form for:</h3>
+    <h4>{{caregiver.name}}</h4>
+    {% for message in messages %}
+        <ul>
+            <li>{{message}}</li>
+        </ul>
+    {% endfor %}
+    <form action="/survey/{{participant.id}}/{{caregiver.id}}/create_caregiver_demo" method="POST">
+        {% csrf_token %}
+        Which ethnicity/race most represents your background?<br>
+        <input type="radio" name="caregiver_race" id="asian" value="Asian">
+        <label for="asian">Asian</label><br>
+
+        <input type="radio" name="caregiver_race" id="aa" value="Black/African American">
+        <label for="aa">Black/African American</label><br>
+
+        <input type="radio" name="caregiver_race" id="l" value="Hispanic/Latinx">
+        <label for="l">Hispanic/Latinx</label><br>
+
+        <input type="radio" name="caregiver_race" id="na" value="Native American/Alaska Native">
+        <label for="na">Native American/Alaska Native</label><br>
+
+        <input type="radio" name="caregiver_race" id="nh" value="Native Hawaiian/Pacific Islander">
+        <label for="nh">Native Hawaiian/Pacific Islander</label><br>
+
+        <input type="radio" name="caregiver_race" id="w" value="White">
+        <label for="w">White</label><br>
+
+        <input type="radio" name="caregiver_race" id="noresponse" value="Prefer not to say">
+        <label for="noresponse">Prefer not to say</label><br>
+        
+        <input type="radio" name="caregiver_race" value="">
+        <label for="oc_race">Other</label><br>
+        <input type="text" name="other_caregiver_race" id="oc_race"><br><br>
+
+        To which gender do you most identify?<br>
+        <input type="radio" name="caregiver_gender" id="f" value="Female">
+        <label for="f">Female</label><br>
+        <input type="radio" name="caregiver_gender" id="m" value="Male">
+        <label for="m">Male</label><br>
+        <input type="radio" name="caregiver_gender" id="t" value="Transgender">
+        <label for="t">Transgender</label><br>
+        <input type="radio" name="caregiver_gender" id="gv" value="Gender Variant/Non-Conforming">
+        <label for="gv">Gender Variant/Non-Conforming</label><br>
+        <input type="radio" name="caregiver_gender" id="notsay" value="Prefer not to say">
+        <label for="notsay">Prefer not to say</label><br>
+        <input type="radio" name="caregiver_gender" value="">
+        <label for="oc_gender">Prefer to Self Describe</label><br>
+        <input type="text" name="other_caregiver_gender" id="oc_gender"><br><br>
+
+        What is the highest education level of the student's caregiver?<br>
+        <input type="radio" name="education_level" id="ed1" value="1st-5th Grade">
+        <label for="ed1">1st-5th Grade</label><br>
+        <input type="radio" name="education_level" id="ed2" value="6th-8th Grade">
+        <label for="ed2">6th-8th Grade</label><br>
+        <input type="radio" name="education_level" id="ed3" value="9th-12th Grade">
+        <label for="ed3">9th-12th Grade</label><br>
+        <input type="radio" name="education_level" id="ed4" value="Graduated4 High School or Equivalent">
+        <label for="ed">Graduated High School or Equivalent</label><br>
+        <input type="radio" name="education_level" id="ed5" value="Some College but No Degree">
+        <label for="ed5">Some College but No Degree</label><br>
+        <input type="radio" name="education_level" id="ed6" value="Associate's Degree">
+        <label for="ed6">Associate's Degree</label><br>
+        <input type="radio" name="education_level" id="ed7" value="Bachelor's Degree">
+        <label for="ed7">Bachelor's Degree</label><br>
+        <input type="radio" name="education_level" id="ed8" value="Post-Graduate Degree">
+        <label for="ed8">Post-Graduate Degree</label><br><br>
+
+        <label for="certs">Has this caregiver obtained any educational or professional certificates? If so, please list certificates below:</label><br>
+        <textarea name="professional_certs" id="certs" cols="60" rows="6"></textarea><br><br>
+
+        {% if participant.caregivers.first %}
+            What is the total household income?<br>
+            <input type="radio" name="household_income" id="hh1" value= "1">
+            <label for="hh1">Less than $10,000</label><br>
+            <input type="radio" name="household_income" id="hh2" value= "2">
+            <label for="hh2">$10,000 to $19,000</label><br>
+            <input type="radio" name="household_income" id="hh3" value= "3">
+            <label for="hh3">$20,000 to $29,000</label><br>
+            <input type="radio" name="household_income" id="hh4" value= "4">
+            <label for="hh4">$30,000 to $39,000</label><br>
+            <input type="radio" name="household_income" id="hh5" value= "5">
+            <label for="hh5">$40,000 to $49,000</label><br>
+            <input type="radio" name="household_income" id="hh6" value= "6">
+            <label for="hh6">$50,000 to $75,000</label><br>
+            <input type="radio" name="household_income" id="hh7" value= "7">
+            <label for="hh7">$75,000 to $100,000</label><br>
+            <input type="radio" name="household_income" id="hh8" value= "8">
+            <label for="hh8">$100,000 or More</label><br><br>
+        {% endif %}
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>

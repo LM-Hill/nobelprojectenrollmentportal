@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'enroll_app/css/bootstrap.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/successstyle.css' %}">
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progress Page</title>
+</head>
+<body>
+    <nav class="navbar navbar-light bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">STEM IL Nobel Project</a>
+        </div>
+    </nav>
+    <div>
+        <br><p><b>Enrollment Progress:</b></p>
+        {% if complete %}
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+        {% else %}
+            {% if half %}
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+            {% endif %}
+            {% if onethird %}
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" style="width: 33%" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>            
+            {% endif %}
+            {% if twothirds %}
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" style="width: 67%" aria-valuenow="67" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+            {% endif %}
+        {% endif %}
+    </div>
+    {% if complete %}
+        <div class="successbox">
+            <div class="successcircle">
+            </div>
+            <div class="successinnerbox">
+                <h4><b>{{participant.first_name}} {{participant.last_name}}'s Forms Complete</b></h4>
+            </div>
+        </div>
+        {% for caregiver in caregivers %}
+            <div class="successbox">
+                <div class="successcircle"></div>
+                <div class="successinnerbox">
+                    <h4><b>{{caregiver.name}}'s Forms Complete</b></h4>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="successbox">
+            <div class="successcircle">
+            </div>
+            <div class="successinnerbox">
+                <h4><b>{{participant.first_name}} {{participant.last_name}}'s Forms Complete</b></h4>
+            </div>
+        </div>
+        {% for caregiver in caregivers %}
+            <div class="successbox">
+                {% if twothirds %}
+                    {% if caregiver.id == c1.id %}
+                        <div class="successcircle"></div>
+                        <div class="successinnerbox">
+                            <h4><b>{{caregiver.name}}'s Forms Complete</b></h4>
+                        </div>
+                    {% else %}
+                        <div class="successcircle" style="background-color: gray;"></div>
+                        <div class="successinnerbox">
+                            <a href="/survey/{{participant.id}}/{{caregiver.id}}/add_caregiver_demographics" class="btn btn-primary">{{caregiver.name}}</a>
+                        </div>
+                    {% endif %}
+                {% endif %}                   
+                {% if onethird %}
+                    {% if caregiver.id == c1.id %}
+                        <div class="successcircle" style="background-color: gray;"></div>
+                        <div class="successinnerbox">
+                            <h4>Forms for:</h4>
+                            <a href="/survey/{{participant.id}}/{{caregiver.id}}/add_caregiver_demographics" class="btn btn-primary">{{caregiver.name}}</a>
+                        </div>
+                    {% else %}
+                        <div class="successcircle" style="background-color: gray;"></div>
+                        <div class="successinnerbox">
+                            <h4>Forms for:</h4>
+                            <a href="#" class="btn btn-secondary">{{caregiver.name}}</a>
+                        </div>
+                    {% endif %}
+                {% endif %}
+                {% if half %}
+                    <div class="successcircle" style="background-color: gray;"></div>
+                    <div class="successinnerbox">
+                    <h4>Forms for:</h4>
+                    <a href="/survey/{{participant.id}}/{{caregiver.id}}/add_caregiver_demographics" class="btn btn-primary">{{caregiver.name}}</a>
+                    </div>
+                {% endif %}
+            </div>
+        {% endfor %}
+    {% endif %}
+    {% if complete %}
+        <div class="successmessage">
+            <h4 style="text-align: center;">Thank you for joining STEM IL Nobel Project!</h4>
+            <p>We want you to be able to hit the ground running, so please be on the look out for an email with Zoom links to our weekly sessions, sign in instructions, class codes for the platforms you will be using, and more!</p>
+            <p>One of our team members will be in touch to schedule an onboarding interview. <u>Before your interview time</u>, please complete our Computer Science Identity <a href="https://surveys.illinois.edu/sec/298497384" target="_blank">SURVEY</a> (please be sure to save the form to your favorites folder before leaving this page).</p>
+            <p style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;"><b>The Nobel Project Team</b></p>
+            <h5 style="text-align: center;">Click <a href="/">here</a> to get back to the home page.</h5>
+        </div>
+    {% endif %}
+</body>
+</html>

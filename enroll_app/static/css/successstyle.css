@@ -1,0 +1,40 @@
+body{
+    margin: 0;
+    padding: 10px;
+}
+
+.navbar-light .navbar-brand{
+    color: white;
+}
+
+.successbox{
+    margin: 10px 10px 10px 43px;
+    height: 238px;
+    width: 345px;
+    padding: 5px;
+    text-align: center;
+    display: inline-block;
+}
+
+.successcircle{
+    margin: 5px;
+    width: 140px;
+    height: 140px;
+    padding: 10px;
+    background-color: green;
+    border-radius: 50%;
+    display: inline-block;    
+}
+
+.successinnerbox{
+    margin: auto;
+    height: 250px;
+    padding: 5px;
+    text-align: center;
+    color: lightgray;
+}
+
+.successmessage{
+    margin: 5px;
+    padding: 25px;
+}

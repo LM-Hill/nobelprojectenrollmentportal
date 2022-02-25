@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'enroll_app/css/bootstrap.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Participant</title>
+</head>
+<body>
+    <nav class="navbar navbar-light bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">STEM IL Nobel Project</a>
+        </div>
+    </nav>
+    <div class="container">
+        <h3>Add Student</h3>
+        <form action="/participant/create" method="POST">
+            {% csrf_token %}
+            <div class="form-group row">
+                <label for="first_name" class="col-sm-2 col-form-label">First Name:</label>
+                <div class="col-sm-10">
+                    <input type="text" class = "form-control-sm" name="first_name" id="first_name" placeholder="First Name"><br>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="last_name" class="col-sm-2 col-form-label">Last Name:</label>
+                <div class="col-sm-10">
+                    <input type="text" class = "form-control-sm" name="last_name" id="last_name" placeholder="Last Name"><br>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="email" class="col-sm-2 col-form-label">Email:</label>
+                <div class="col-sm-10">
+                    <input type="email" class = "form-control-sm" name="email" id="email" placeholder="Ex: name@example.com"><br>
+                </div>    
+            </div>
+
+            <div class="form-group row">
+                <label for="phone" class="col-sm-2 col-form-label">Phone Number:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control-sm" name="phone" id="phone" placeholder="No - or (); incld area code"><br>
+                </div>
+            </div>    
+
+            <div class="form-group row">
+                <label for="address" class="col-sm-2 col-form-label">Address:</label>
+                <div class="col-sm-10">
+                    <input type="text" class = "form-control-sm" name="address" id="address" placeholder="123 Main Street"><br>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="city" class="col-sm-2 col-form-label">City:</label>
+                <div class="col-sm-10">
+                    <input type="text" class = "form-control-sm" name="city" id="city" placeholder="Anytown"><br>
+                </div>
+            </div>    
+
+            <div class="form-group row">
+                <label for="state" class="col-sm-2 col-form-label">State:</label>
+                <div class="col-sm-10">
+                    <input type="text" class = "form-control-sm" name="state" id="state" placeholder="US"><br>
+                </div>
+            </div>    
+
+            <div class="form-group row">
+                <label for="zip_code" class="col-sm-2 col-form-label">Zip:</label>
+                <div class="col-sm-10">
+                    <input type="text" class = "form-control-sm" name="zip_code" id="zip_code" placeholder="11111"><br>
+                </div>
+            </div>    
+
+            <div class="form-group row">
+                <label hidden for="enroll_date" class="col-sm-2 col-form-label">Enroll:</label>
+                <div class="col-sm-10">
+                    <input hidden type="date" class = "form-control-sm" name="enroll_date" id="enroll_date"><br>
+                </div>
+            </div>    
+    
+            <input type="submit"    value = "Save and Continue">
+        </form>
+        {% for message in messages %}
+        <ul>
+            <li>
+                {{message}}
+            </li>
+        </ul>
+        {% endfor %}
+    </div>
+</body>
+</html>

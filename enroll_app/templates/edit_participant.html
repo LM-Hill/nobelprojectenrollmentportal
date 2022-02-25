@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'enroll_app/css/bootstrap.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Participant</title>
+</head>
+<body>
+    <nav class="navbar navbar-light bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">Home Page</a>
+            <a id="rightlink" href="/participant/{{participant.id}}/profile">Back</a>
+        </div>
+    </nav>
+    <div class="container">
+        <h3>Edit Profile for: {{participant.first_name}} {{participant.last_name}}</h3>
+        <form action="/participant/{{participant.id}}/update" method="POST">
+            {% csrf_token %}
+            <div class="form-group row">
+                <label for='first_name' class="col-sm-2 col-form-label">First Name:</label>
+                <div class="col-sm-10">
+                    <input type='text' name='first_name' class = "form-control-sm" id='first_name' value='{{participant.first_name}}'><br>
+                </div>
+            </div>
+            
+            <div class="form-group row">
+                <label for='last_name' class="col-sm-2 col-form-label">Last Name:</label>
+                <div class="col-sm-10">
+                    <input type='text' name='last_name' class = "form-control-sm" id='last_name' value = '{{participant.last_name}}'><br>
+                </div>
+            </div>
+            
+            <div class="form-group row">
+                <label for='email' class="col-sm-2 col-form-label">Email:</label>
+                <div class="col-sm-10">
+                    <input type='text' name='email' class = "form-control-sm" id='email' value = '{{participant.email}}'><br>
+                </div>
+            </div>
+            
+            <div class="form-group row">
+                <label for='phone' class="col-sm-2 col-form-label">Phone Number:</label>
+                <div class="col-sm-10">
+                    <input type='text' name='phone' class = "form-control-sm" id='phone' value = '{{participant.phone}}'><br>
+                </div>
+            </div>
+            
+            <div class="form-group row">
+                <label for='address' class="col-sm-2 col-form-label">Address:</label>
+                <div class="col-sm-10">
+                    <input type='text' name='address' class = "form-control-sm" id='address' value = '{{participant.address}}'><br>
+                </div>
+            </div>
+            
+            <div class="form-group row">
+                <label for='city' class="col-sm-2 col-form-label">City:</label>
+                <div class="col-sm-10">
+                    <input type='text' name='city' class = "form-control-sm" id='city' value = '{{participant.city}}'><br>
+                </div>
+            </div>
+            
+            <div class="form-group row">
+                <label for='state' class="col-sm-2 col-form-label">State:</label>
+                <div class="col-sm-10">
+                    <input type='text' name='state' class = "form-control-sm" id='state' value = '{{participant.state}}'><br>
+                </div>
+            </div>
+            
+            <div class="form-group row">
+                <label for='zip_code' class="col-sm-2 col-form-label">Zip:</label>
+                <div class="col-sm-10">
+                    <input type='text' name='zip_code' class = "form-control-sm" id='zip_code' value = '{{participant.zip_code}}'><br>
+                </div>
+            </div>
+            
+            <div class="form-group row">
+                <label for='enrollment' class="col-sm-2 col-form-label">Enrollment Status</label>
+                <div class="col-sm-10">
+                    <select name='enrollment' class = "form-control-sm" id='enrollment'>
+                        <option value='{{participant.NOT_ENROLLED}}' {% if participant.enrollment == participant.NOT_ENROLLED %}selected{% endif %}>Not Enrolled</option>
+                        <option value='{{participant.PENDING}}'{% if participant.enrollment == participant.PENDING %}selected{% endif %}>Enrollment Pending</option>
+                        <option value='{{participant.ENROLLED}}'{% if participant.enrollment == participant.ENROLLED %}selected{% endif %}>Enrolled</option>
+                    </select><br>
+                </div>
+            </div>
+            
+            <div class="form-group row">
+                <label for='participation' class="col-sm-2 col-form-label">Participation Status</label>
+                <div class="col-sm-10">
+                    <select name='participation' class = "form-control-sm" id='participation'>
+                        <option value='{{participant.INACTIVE}}'{% if participant.participation == participant.INACTIVE %}selected{% endif %}>Inactive</option>
+                        <option value='{{participant.ACTIVE}}'{% if participant.participation == participant.ACTIVE %}selected{% endif %}>Active</option>
+                    </select><br>
+                </div>
+            </div>
+            
+            <div class="form-group row">
+                <label for='enroll_date' class="col-sm-2 col-form-label">Enrollment Date:</label>
+                <div class="col-sm-10">
+                    <input type='date' name='enroll_date' class = "form-control-sm" id='enroll_date' value='{{participant.enroll_date|date:"Y-m-d"}}'><br><br>
+                </div>
+            </div>
+    
+            <input type="submit"    value = "Update Participant Information">
+        </form><br>
+    </div>
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>

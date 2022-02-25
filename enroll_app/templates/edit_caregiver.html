@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'enroll_app/css/bootstrap.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Caregiver</title>
+</head>
+<body>
+    <nav class="navbar navbar-light bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">Home Page</a>
+            <a id="rightlink" href="/participant/{{participant.id}}/profile">Back</a>
+        </div>
+    </nav>
+    <div class="container">
+        <h4>Edit Caregiver: {{this_caregiver.name}}</h4><br>
+        <form action="/participant/{{participant.id}}/{{this_caregiver.id}}/update_caregiver" method="POST">
+            {% csrf_token %}
+            <div class="form-group row">
+                <label for='caregiver_name' class="col-sm-2 col-form-label">Name:</label>
+                <div class="col-sm-10">
+                    <input type='text' name='name' class = "form-control-sm" id='caregiver_name' value='{{this_caregiver.name}}'><br>
+                </div>
+            </div>
+            
+            <div class="form-group row">
+                <label for='caregiver_email' class="col-sm-2 col-form-label">Email:</label>
+                <div class="col-sm-10">
+                    <input type='text' name='email' class = "form-control-sm" id='caregiver_email' value='{{this_caregiver.email}}'><br>
+                </div>
+            </div>
+            
+            <div class="form-group row">
+                <label for='caregiver_phone' class="col-sm-2 col-form-label">Phone Number:</label>
+                <div class="col-sm-10">
+                    <input type='text' name='phone' class = "form-control-sm" id='caregiver_phone' value='{{this_caregiver.phone}}'><br><br>
+                </div>
+            </div>
+    
+            <input type="submit"    value = "Update Caregiver Information">
+        </form><br>
+    </div>
+
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>

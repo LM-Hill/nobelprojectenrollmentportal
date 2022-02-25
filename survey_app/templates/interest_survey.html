@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'survey_app/css/bootstrap.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/style2.css' %}">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interest Survey</title>
+</head>
+<body>
+    <nav class="navbar navbar-light bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">STEM IL Nobel Project</a>
+        </div>
+    </nav>
+    <div class="container">
+        <h3>Student interest form for: {{participant.first_name}} {{participant.last_name}}</h3>
+        {% for message in messages%}
+            <ul>
+                <li>{{message}}</li>
+            </ul>
+        {% endfor %}
+        <form action="/survey/{{participant.id}}/create_interest_survey" method="POST">
+            {% csrf_token %}
+            How did you hear about the program?<br>
+            <input type="radio" name="referral" id="newspaper" value="Newspaper">
+            <label for="newspaper">Newspaper</label><br>
+            <input type="radio" name="referral" id="friend" value="Friend or Co-worker">
+            <label for="friend">Friend or Co-worker</label><br>
+            <input type="radio" name="referral" id="fb" value="Facebook">
+            <label for="fb">Facebook</label><br>
+            <input type="radio" name="referral" id="tw" value="Twitter">
+            <label for="tw">Twitter</label><br>
+            <input type="radio" name="referral" id="ig" value="Instagram">
+            <label for="ig">Instagram</label><br>
+            <input type="radio" name="referral" id="linked" value="LinkedIn">
+            <label for="linked">LinkedIn</label><br>
+            <input type="radio" name="referral" id="teacher" value="Teacher">
+            <label for="teacher">Teacher</label><br>
+            <input type="radio" name="referral" id="cp" value="Community Program">
+            <label for="cp">Community Program</label><br>
+            <input type="radio" name="referral" id="fm" value="Family Member">
+            <label for="fm">Family Member</label><br>
+            <input type="radio" name="referral" id="ri" value="Religious Institution">
+            <label for="ri">Religious Institution</label><br><br>
+    
+            <label for="expectation">What would the student like to get out of the program?</label>
+            <input type="textarea" class="form-control" name="expectation" id="expectation"><br>
+            
+            <label for="dream_career">What is the student's dream career? Remember the sky is the limit :)</label>
+            <input type="textarea" class="form-control" name="dream_career" id="dream_career"><br>
+    
+            <label for="social_issue">What social problems would the student like to address?</label>
+            <input type="textarea" class="form-control" name="social_issue" id="social_issue"><br>
+
+            <label for="goals">List three goals that the student has for their future?</label>
+            <input type="textarea" class="form-control" name="goals" id="goals"><br>
+    
+            <input type="submit"    value = "Save and Continue">
+        </form>
+    </div>
+    
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'enroll_app/css/bootstrap.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/homestyle.css' %}">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+<body>
+    <nav class="navbar navbar-light bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">STEM IL Nobel Project</a>
+            <a id="sign_in" href="login/signin">Login</a>
+        </div>
+    </nav>
+    <div class="wrapper">
+        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img id="entrypics" src="../static/enroll_app/images/flyer.png" class="d-block w-100" alt="Computer Science is Everywhere">
+                </div>
+                <div class="carousel-item">
+                    <img id="entrypics" src="../static/enroll_app/images/dreamincubator.png" class="d-block w-100" alt="Dream Incubator">
+                </div>
+                <div class="carousel-item">
+                    <img id="entrypics" src="../static/enroll_app/images/uia_flyer.png" class="d-block w-100" alt="Art for Health and Unity">
+                </div>
+            </div>
+        </div>
+        <div class="togobox">
+            <div class="circle"></div>
+            <div class="innerbox">
+                <h1>Apply</h1>
+                <p>We appreciate your interest in the STEM IL Nobel Project! Please complete the enrollment forms to get started right away.</p>
+                <a href="/participant/add_participant" class="btn btn-primary">Click here to Apply</a>
+            </div>
+        </div>
+        <div class="togobox">
+            <div class="circle"></div>
+            <div class="innerbox">
+                <h1>About</h1>
+                <p>The mission of the Nobel Project is to provide middle- and high-school students unprecedented access to the STEM disciplines.</p>
+                <a href="/about" class="btn btn-primary">Click About</a>
+            </div>
+        </div>
+        <div class="togobox">
+            <div class="circle"></div>
+            <div class="innerbox">
+                <h1>Contact Us</h1>
+                <p>We welcome inquiries about the Nobel Project, the enrollment process, what to expect out of the program, etc. Please contact us!</p>
+                <a href="/contactus" class="btn btn-primary">Click to Contact Us</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'survey_app/css/bootstrap.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/style2.css' %}">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stipend Form</title>
+</head>
+<body>
+    <nav class="navbar navbar-light bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">STEM IL Nobel Project</a>
+        </div>
+    </nav>
+    <div class="container">
+        <div id= "enrollform">
+            <iframe src="/static/survey_app/STEM Illinois Nobel Project Enrollment Forms 12-20.pdf" width="100%" height="900px"></iframe>
+        </div>
+        <div id="enrollquestions">
+            <h5>Talent Release and Stipend Forms</h5>
+            <p style="color: blue">Please read the Talent Release form in the panel to your left and respond to the questions below.</p>
+            <p style="color: blue">The STEM IL Nobel project offers a quarterly stipend in the amount of $100 to active participants. Please read the W-9 and Vendor Information forms (pp. 2-12) in the panel to your left and complete the form below:</p>
+            {% for message in messages%}
+                <ul>
+                    <li>{{message}}</li>
+                </ul>
+            {% endfor %}
+            <form action="/survey/{{participant.id}}/{{caregiver.id}}/create_stipend_form" method="POST">
+                {% csrf_token %}
+                1. Do you agree to the terms of the Talent Release Form?
+                <input type="radio" name="talent" id="yes1" value="Yes">
+                <label for="yes1">Yes</label>
+                <input type="radio" name="talent" id="no1" value="No">
+                <label for="no1">No</label><br><br>
+
+                2. Who would you like for the check to be made out to?<br>
+                <input type="radio" name="payable" id="student" value="{{participant.first_name}} {{participant.last_name}}">
+                <label for="student">{{participant.first_name}} {{participant.last_name}}</label><br>
+                {% for caregiver in participant.caregivers.all %}
+                <input type="radio" name="payable" value="{{caregiver.name}}">
+                <label for="care">{{caregiver.name}}</label><br>
+                {% endfor %}
+                
+                <br>3. Is payee a United States (U.S.) citizen?<br>
+                <input type="radio" name="citizen" id="yes3" value="Yes">
+                <label for="yes3">Yes</label>
+                <input type="radio" name="citizen" id="no3" value="No">
+                <label for="no3">No</label><br><br>
+
+                <div class="form-group row">
+                    <label for="soc">4. Payee's Social Security Number:</label><br>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="soc_sec" id="soc" placeholder="Please include dashes"><br>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="soc">5. Payee's Date of birth:</label><br>
+                    <div class="col-sm-10">
+                        <input type="date" class="form-control" name="dateofbirth" id="dob"><br>
+                    </div>
+                </div>
+    
+                <br><label for="pmtaddr">If payment address is different from your permanent address, please enter it below:</label><br>
+                <input type="text" class="col-sm-9" name="pmtaddr" id="pmtaddr" placeholder="Ex: 123 Main Street, Anywhere, US, 11111"><br><br>
+    
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
+</body>
+</html>

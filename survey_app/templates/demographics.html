@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'survey_app/css/bootstrap.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/style2.css' %}">
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Demographics Questionnaire</title>
+    </head>
+    <body> 
+        <nav class="navbar navbar-light bg-primary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/">STEM IL Nobel Project</a>
+            </div>
+        </nav>
+        <div class="container">
+            <h3>Demographics Form for: </h3>
+            <h4>{{participant.first_name}} {{participant.last_name}}</h4>
+            {% for message in messages %}
+                <ul>
+                    <li>{{message}}</li>
+                </ul>
+            {% endfor %}
+            <form action="/survey/{{participant.id}}/create" method="POST">
+                {% csrf_token %}
+                Which ethnicity/race most represents your background?<br>
+                <input type="radio" name="race" id="asian" value="Asian">
+                <label for="asian">Asian</label><br>
+
+                <input type="radio" name="race" id="aa" value="Black/African American">
+                <label for="aa">Black/African American</label><br>
+
+                <input type="radio" name="race" id="l" value="Hispanic/Latinx">
+                <label for="l">Hispanic/Latinx</label><br>
+
+                <input type="radio" name="race" id="na" value="Native American/Alaska Native">
+                <label for="na">Native American/Alaska Native</label><br>
+
+                <input type="radio" name="race" id="nh" value="Native Hawaiian/Pacific Islander">
+                <label for="nh">Native Hawaiian/Pacific Islander</label><br>
+
+                <input type="radio" name="race" id="w" value="White">
+                <label for="w">White</label><br>
+
+                <input type="radio" name="race" id="noresponse" value="Prefer not to say">
+                <label for="noresponse">Prefer not to say</label><br>
+
+                <input type="radio" name="race" value="">
+                <label for="o_race">Other</label><br>
+                <input type="text" name="other_race" id="o_race"><br><br>
+
+                To which gender do you most identify?<br>
+                <input type="radio" name="gender" id="f" value="Female">
+                <label for="f">Female</label><br>
+
+                <input type="radio" name="gender" id="m" value="Male">
+                <label for="m">Male</label><br>
+
+                <input type="radio" name="gender" id="t" value="Transgender">
+                <label for="t">Transgender</label><br>
+
+                <input type="radio" name="gender" id="gv" value="Gender Variant/Non-Conforming">
+                <label for="gv">Gender Variant/Non-Conforming</label><br>
+
+                <input type="radio" name="gender" id="notsay" value="Prefer not to say">
+                <label for="notsay">Prefer not to say</label><br>
+
+                <input type="radio" name="gender" value="">
+                <label for="self_describe">Prefer to Self Describe</label><br>
+                <input type="text" name="other_gender" id="self_describe"><br><br>
+
+                Student's current grade level:<br>
+                <input type="radio" name="grade_level" id="5" value="5th Grade">
+                <label for="5">5th Grade</label><br>
+                <input type="radio" name="grade_level" id="6" value="6th Grade">
+                <label for="6">6th Grade</label><br>
+                <input type="radio" name="grade_level" id="7" value="7th Grade">
+                <label for="7">7th Grade</label><br>
+                <input type="radio" name="grade_level" id="8" value="8th Grade">
+                <label for="8">8th Grade</label><br>
+                <input type="radio" name="grade_level" id="9" value="9th Grade">
+                <label for="9">9th Grade</label><br>
+                <input type="radio" name="grade_level" id="10" value="10th Grade">
+                <label for="10">10th Grade</label><br>
+                <input type="radio" name="grade_level" id="11" value="11th Grade">
+                <label for="11">11th Grade</label><br>
+                <input type="radio" name="grade_level" id="12" value="12th Grade">
+                <label for="12">12th Grade</label><br><br>
+
+                Who lives in the student's household?<br>
+                <input type="radio" name="household" id="mother" value="Mother">
+                <label for="mother">Mother</label><br>
+                <input type="radio" name="household" id="father" value="Father">
+                <label for="father">Father</label><br>
+                <input type="radio" name="household" id="grandfather" value="Grandfather">
+                <label for="grandfather">Grandfather</label><br>
+                <input type="radio" name="household" id="grandmother" value="Grandmother">
+                <label for="grandmother">Grandmother</label><br>
+                <input type="radio" name="household" id="foster" value="Foster Parent">
+                <label for="foster">Foster Parent</label><br>
+                <input type="radio" name="household" id="aunt" value="Aunt">
+                <label for="aunt">Aunt</label><br>
+                <input type="radio" name="household" id="uncle" value="Uncle">
+                <label for="uncle">Uncle</label><br>
+                <input type="radio" name="household" id="brother" value="Brother">
+                <label for="brother">Brother</label><br>
+                <input type="radio" name="household" id="sister" value="Sister">
+                <label for="sister">Sister</label><br>
+                <input type="radio" name="household" id="cousin" value="Cousin">
+                <label for="cousin">Cousin</label><br>
+                <input type="radio" name="household" id="neighbor" value="Neighbor">
+                <label for="neighbor">Neighbor</label><br>
+                <input type="radio" name="household" id="friend" value="Family Friend">
+                <label for="friend">Family Friend</label><br>
+                <input type="radio" name="household" value="">
+                <label for="o_hh">Other</label><br>
+                <input type="text" name="other_household" id="o_hh"><br><br>
+
+                <div class="form-group row">
+                    <label for="age" class="col-sm-2 col-form-label">Age:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class = "form-control" name="age" id="age"><br>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="school" class="col-sm-2 col-form-label">Name of school:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class = "form-control" name="school" id="school"><br><br>
+                    </div>
+                </div>
+
+                <input type="submit"    value = "Save and Continue">
+            </form>
+        </div>
+        <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+        <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    </body>
+</html>

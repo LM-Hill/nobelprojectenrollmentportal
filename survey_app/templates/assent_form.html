@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'survey_app/css/bootstrap.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/style2.css' %}">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assent Form</title>
+</head>
+<body>
+    <nav class="navbar navbar-light bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">STEM IL Nobel Project</a>
+        </div>
+    </nav>
+    <div class="container">
+        <div id= "enrollform">
+            <iframe src="/static/survey_app/Final IRB  Assent_CS Pipeline 12.5.20.pdf" width="100%" height="900px"></iframe>
+        </div>
+        <div id="enrollquestions">
+            <h5>Assent Form for: {{participant.first_name}} {{participant.last_name}}</h5>
+            <p style="color: blue">Please read the IRB Assent form in the panel to your left and respond to the questions on page 3 using the options below.</p>
+            {% for message in messages %}
+                <ul>
+                    <li>{{message}}</li>
+                </ul>
+            {% endfor %}
+            <form action="/survey/{{participant.id}}/create_assent_form" method="POST">
+                {% csrf_token %}
+                <div class="form-group row">
+                    <label for="q1">1. Can you tell me what we are asking you to do?</label><br>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="assentq1" id="q1" placeholder="Please provide response"><br>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="q2">2. Can you tell me what the risks (or not good things) are for this study?</label><br>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="assentq2" id="q2" placeholder="Please provide response"><br>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="q3">3. Can you tell me what the benefits (or good things) are for this study?</label><br>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="assentq3" id="q3" placeholder="Please provide response"><br>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="q4">4. Do you have other questions about any information that may not be clear?</label><br>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="assentq4" id="q4" placeholder="Please provide response"><br>
+                    </div>
+                </div>
+                
+                5. I give permission for my interview to be video recorded.<br>
+                <input type="radio" name="svideo" id="yes5" value="Yes">
+                <label for="yes5">Yes</label>
+                <input type="radio" name="svideo" id="no5" value="No">
+                <label for="no5">No</label><br><br>
+                
+                6. I have permission for my interview to be audio recorded.<br>
+                <input type="radio" name="saudio" id="yes6" value="Yes">
+                <label for="yes6">Yes</label>
+                <input type="radio" name="saudio" id="no6" value="No">
+                <label for="no6">No</label><br><br>
+
+                7. I give permission to be contacted in the future regarding this and other research.<br>
+                <input type="radio" name="sfuture" id="yes7" value="Yes">
+                <label for="yes7">Yes</label>
+                <input type="radio" name="sfuture" id="no7" value="No">
+                <label for="no7">No</label><br><br>
+
+                <input type="hidden" name="stusign" id="stusignature" value="{{participant.first_name}} {{participant.last_name}}">
+    
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'survey_app/css/bootstrap.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/style2.css' %}">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Survey Page</title>
+</head>
+<body>
+    <nav class="navbar navbar-light bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/dashboard">Dashboard</a>
+            <a id="rightlink" href="/participant/{{participant.id}}/profile">Back</a>
+        </div>
+    </nav>
+    <div class="main">
+        <div id="demos">
+            <div class="card" style="width: 18rem;">
+                <img src="../static/survey_app/img/placeholder.png" class="card-img-top" alt="profile picture">
+                <div class="card-body">
+                    <h5 class="card-title">{{participant.first_name}} {{participant.last_name}}</h5>
+                    <p class="card-text">
+                        Race: {{demographics.race}}<br>
+                        Gender: {{demographics.gender}}<br>
+                        Grade Level: {{demographics.grade_level}}<br>
+                        Age: {{demographics.age}}<br>
+                        School: {{demographics.school}}<br>
+                        Primary Household Member(s): {{demographics.household}}
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div id="dreams">
+            {% for participant in participant.interest_survey.all %}
+                <p><b>How did you hear about the program?</b></p>
+                <p>{{participant.referral}}</p>
+                <p><b>What would the student like to get out of the program?</b></p>
+                <p>{{participant.expectation}}</p>
+                <p><b>List three goals that the student has for their future:</b></p>
+                <p>{{participant.goals}}</p>
+                <p><b>What is the student's dream career?</b></p>
+                <p>{{participant.dream_career}}</p>
+                <p><b>What social problems would the student like to address?</b></p>
+                <p>{{participant.social_issue}}</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>

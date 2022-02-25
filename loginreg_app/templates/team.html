@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'loginreg/css/bootstrap.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/loginstyle.css' %}">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team Info Page</title>
+</head>
+<body style="background-color: white;">
+    <nav class="navbar navbar-light bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/dashboard">Dashboard</a>
+            <a id="rightlink" href="/login/logout">Logout</a>
+        </div>
+    </nav>
+    <div class="container">
+        <h2>Participant Records</h2>
+        <table class="table table-striped">
+            <thead>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Phone Number</th>
+                <th scope="col">Actions</th>
+            </thead>
+            <tbody>
+                {% for member in team %}
+                <tr>
+                    <td>{{member.userfirst_name}} {{member.userlast_name}}</td>
+                    <td>{{member.user_email}}</td>
+                    <td>{{member.user_phone}}</td>
+                    <td><a href="/login/{{user.id}}/edit">Edit</a>
+                        {% if not admin.id == member.id %}|
+                        <a href="/login/{{user.id}}/delete">Delete</a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table><br>
+    </div>
+</body>
+</html>

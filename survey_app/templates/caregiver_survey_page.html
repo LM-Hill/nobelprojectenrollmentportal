@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'survey_app/css/bootstrap.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/style2.css' %}">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caregiver Survey</title>
+</head>
+<body>
+    <nav class="navbar navbar-light bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/dashboard">Dashboard</a>
+            <a id="rightlink" href="/participant/{{participant.id}}/profile">Back</a>
+        </div>
+    </nav>
+    <div class="main">
+        <div id="demos">
+            <div class="card" style="width: 18rem;">
+                    <img src="/static/survey_app/img/firstcare.png" class="card-img-top" alt="profile picture">
+                <div class="card-body">
+                    <h5 class="card-title">{{caregiver.name}}</h5>
+                    <p class="card-text">
+                        Race: {{caregiver_demographics.caregiver_race}}<br>
+                        Gender: {{caregiver_demographics.caregiver_gender}}<br>
+                        Education Level: {{caregiver_demographics.education_level}}<br>
+                        Professional Certifications: {{caregiver_demographics.professional_certs}}<br>
+                        Household Income: {{caregiver_demographics.get_household_income_display}}
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div id="dreams">
+            {% for caregiver in caregiver.caregiver_interest_survey.all %}
+                <p><b>What would this caregiver like for their child to get out of the program?</b></p>
+                <p>{{caregiver.caregiver_expectation}}</p>
+                <p><b>List three goals that this caregiver has for their future:</b></p>
+                <p>{{caregiver.caregiver_goals}}</p>
+                <p><b>What is the caregiver's dream career?</b></p>
+                <p>{{caregiver.caregiver_dream_career}}</p>
+                <p><b>Does this caregiver currently have their dream career?</b></p>
+                <p>{{caregiver.career}}</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>

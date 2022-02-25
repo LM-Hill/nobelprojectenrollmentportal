@@ -1,0 +1,41 @@
+body{
+    margin: 0;
+    padding: 20px;
+}
+
+.navbar-light .navbar-brand{
+    color: white;
+}
+
+.navbar-light .navbar-text{
+    color: white;
+}
+
+h3#aboutstory{
+    text-align: justify;
+}
+
+p#aboutstory{
+    text-align: justify;
+    font-size: 25px;
+}
+
+div#nobelimg{
+    float: right;
+    margin: 20px;
+}
+
+img#nobel{
+    height: 350px;
+    width: 350px;
+}
+
+div#contactmessage{
+    padding: 100px;
+    text-align: center;
+}
+
+a#rightlink{
+    justify-content: space-between;
+    color: white;
+}

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'enroll_app/css/bootstrap.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Additional Caregivers</title>
+</head>
+<body>
+    <nav class="navbar navbar-light bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">STEM IL Nobel Project</a>
+        </div>
+    </nav>
+    <div class="container">
+        <h3>Additional Caregivers</h3>
+        <h4 style="color: red">Please add at least one(1) additional caregiver OR emergency contact</h4><br>
+        <div class="row">
+            <div class="col-sm-6">
+                <h4>Caregiver 2 (Optional)</h4>
+                <form action="/participant/{{participant.id}}/create_caregiver" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group row">
+                        <label for="name" class="col-sm-2 col-form-label">Full Name:</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="name" class = "form-control-sm" id="name" placeholder="Full Name"><br>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label for="email" class="col-sm-2 col-form-label">Email:</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="email" class = "form-control-sm" id="email" placeholder="name@example.com"><br>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label for="phone" class="col-sm-2 col-form-label">Phone Number:</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="phone" class = "form-control-sm" id="phone" placeholder="No - or (); incld area code"><br>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label for="relationship" class="col-sm-2 col-form-label">Relationship:</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="relationship" class = "form-control-sm" id="relationship" placeholder="Aunt"><br>
+                        </div>
+                    </div>
+            
+                    <input type="submit"    value = "Submit Second Caregiver Info">
+                </form>
+                {% for message in messages %}
+                <ul>
+                    <li>{{message}}</li>
+                </ul>
+                {% endfor %}
+            </div>
+            <div class="col-sm-6">
+                <h4>Other Contact (Optional)</h4>
+                <form action="/participant/{{participant.id}}/create_contact" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group row">
+                        <label for="name" class="col-sm-2 col-form-label">Full Name:</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="contact_name" class = "form-control-sm" id="name" placeholder="Full Name"><br>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label for="email" class="col-sm-2 col-form-label">Email:</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="contact_email" class = "form-control-sm" id="email" placeholder="name@example.com"><br>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="phone" class="col-sm-2 col-form-label">Phone Number:</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="contact_phone" class = "form-control-sm" id="phone" placeholder="No - or (); incld area code"><br>
+                        </div>
+                    </div>
+                    <input type="submit"    value = "Submit Contact Info">
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'enroll_app/css/bootstrap.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+</head>
+<body>
+    <nav class="navbar navbar-light bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/dashboard">Dashboard</a>
+            <a id="rightlink" href="/login/logout">Logout</a>
+        </div>
+    </nav>
+    <div class="container">
+        <h4>Profile: {{participant.first_name}} {{participant.last_name}}</h4>
+        <table class="table">
+            <thead>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Address</th>
+                <th scope="col">City</th>
+                <th scope="col">State</th>
+                <th scope="col">Zip</th>
+                <th scope="col">Actions</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{participant.first_name}}</td>
+                    <td>{{participant.last_name}}</td>
+                    <td>{{participant.address}}</td>
+                    <td>{{participant.city}}</td>
+                    <td>{{participant.state}}</td>
+                    <td>{{participant.zip_code}}</td>
+                    <td><a href="/participant/{{participant.id}}/delete">Delete</a> {% if participant.targets.exists %}|
+                        <a href="/survey/{{participant.id}}">View Survey</a>
+                    {% endif %}
+                </td>
+                </tr>
+            </tbody>
+        </table>
+        <h4>Caregiver Information:</h4>
+        <table class="table">
+            <h5>Caregivers:</h5>
+            <thead>
+                <th scope="col">Name</th>
+                <th scope="col">Relationship</th>
+                <th scope="col">Email Name</th>
+                <th scope="col">Phone Number</th>
+                <th scope="col">Actions</th>
+            </thead>
+            <tbody>
+                {% for caregiver in participant.caregivers.all %}
+                <tr>
+                    <td>{{caregiver.name}}</td>
+                    <td>{{caregiver.relationship}}</td>
+                    <td>{{caregiver.email}}</td>
+                    <td>{{caregiver.phone}}</td>
+                    <td><a href="/participant/{{participant.id}}/{{caregiver.id}}/remove">Remove</a>  |  <a href="/participant/{{participant.id}}/{{caregiver.id}}/edit_caregiver">Edit</a>  |  <a href="/participant/{{participant.id}}/{{caregiver.id}}/delete_caregiver">Delete</a>
+                    {% if caregiver.caregiver_targets.exists %}| 
+                        <a href="/survey/{{participant.id}}/{{caregiver.id}}/caregiver_survey">View Survey</a>
+                    {% endif %}
+                    <td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <table class="table">
+            <h5>Other Contact:</h5>
+            <thead>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Phone Number</th>
+                <th scope="col">Actions</th>
+            </thead>
+            <tbody>
+                {% if participant.contact.count == 0 and participant.caregivers.count < 2 %}
+                    <td><a href="/participant/{{participant.id}}/more_caregivers">Add Caregiver or Contact</a></td>
+                {% else %}
+                    {% for contact in participant.contact.all %}
+                    <tr>
+                        <td>{{contact.name}}</td>
+                        <td>{{contact.email}}</td>
+                        <td>{{contact.phone}}</td>
+                        <td><a href="/participant/{{participant.id}}/{{contact.id}}/edit_contact">Edit</a>  |  <a href="/participant/{{participant.id}}/{{contact.id}}/delete_contact">Delete</a></td>
+                    </tr>
+                    {% endfor %}
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>

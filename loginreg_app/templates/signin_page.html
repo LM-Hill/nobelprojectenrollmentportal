@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'loginreg/css/bootstrap.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/loginstyle.css' %}">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+</head>
+<body>
+    <nav class="navbar navbar-light bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">STEM IL Nobel Project</a></h1>
+        </div>
+    </nav>
+    <div class="maincardwrapper">
+        <div class="card" style="width: 18rem; height: 18rem;">
+            <img src="../static/loginreg/images/login_pic.png" class="card-img-top" alt="Login Form">
+            <div class="card-body">
+                <h5 class="card-title">Login</h5>
+                <p class="card-text">
+                    <p>Not yet registered? <a href="/login/register">Register here</a></p>
+                    <form action="/login/login_user" method="POST">
+                        {% csrf_token %}
+                        {% if messages %}
+                            <ul class="messages" style="color: red">
+                                {% for message in messages %}
+                                    <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                        <label for="em">Email</label>
+                        <input type="text" class="form-control" name="user_email" id="em">
+
+                        <label for="pw">Password</label>
+                        <input type="password" class="form-control" name="password" id="pw">
+
+                        <input type="submit" class="btn btn-primary" value="Submit">
+                    </form>
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

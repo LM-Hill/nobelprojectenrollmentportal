@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'loginreg/css/bootstrap.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/loginstyle.css' %}">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Page</title>
+</head>
+<body>
+    <nav class="navbar navbar-light bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">STEM IL Nobel Project</a>
+            <a id="rightlink" href="/login/signin">Sign in</a>
+        </div>
+    </nav>
+    <div class="main">
+        <div class="register">
+            <div id="reghead">
+                <h3>Register</h3>
+            </div>
+            <div id="regmain">
+                {% for message in messages %}
+                <ul>
+                    <li>{{message}}</li>
+                </ul>
+                {% endfor %}
+                <form action="/login/create_user" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group row">
+                        <label for="fn" class="col-sm-2 col-form-label">First Name</label><br>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control-sm" name="userfirst_name" id="fn"><br>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="ln" class="col-sm-2 col-form-label">Last Name</label><br>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control-sm" name="userlast_name" id="ln"><br>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="em" class="col-sm-2 col-form-label">Email</label><br>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control-sm" name="user_email" id="em"><br>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="ph" class="col-sm-2 col-form-label">Phone Number</label><br>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control-sm" name="user_phone" id="ph"><br>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="pw" class="col-sm-2 col-form-label">Password</label><br>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control-sm" name="password" id="pw"><br>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="cpw" class="col-sm-2 col-form-label">Confirm Password</label><br>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control-sm" name="confirm_password" id="cpw"><br><br>
+                        </div>
+                    </div>
+                    
+                    <input type="submit" class="btn btn-primary" value="Register">
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

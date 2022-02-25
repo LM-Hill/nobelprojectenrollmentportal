@@ -1,0 +1,28 @@
+body{
+    background-color: lightgray;
+}
+
+a#rightlink{
+    justify-content: space-between;
+    color: white;
+}
+
+.maincardwrapper{
+    text-align: center;
+}
+
+.card-body{
+    text-align: justify;
+}
+
+.card{
+    display: inline-block;
+}
+
+.navbar-light .navbar-brand{
+    color: white;
+}
+
+.navbar-light .navbar-text{
+    color: white;
+}

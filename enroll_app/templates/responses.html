@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'enroll_app/css/bootstrap.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/responsestyle.css' %}">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enrollment Packet Responses</title>
+</head>
+<body>
+    <nav class="navbar navbar-light bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/dashboard">Dashboard</a>
+            <a id="rightlink" href="/login/logout">Logout</a>
+        </div>
+    </nav>
+    <div class="container">
+        <h4>{{participant.first_name}} {{participant.last_name}}</h4>
+        <div class="row">
+            <div class="col-xs-4" style="color: green;">
+                {% for answer in assentresponses %}
+                    <h5>Assent form responses:</h5>
+                    <h6>1. Can you tell me what we are asking you to do?</h6>
+                    <p>{{answer.assentq1}}</p>
+                    <h6>2. Can you tell me what the risks (or not good things) are for this study?</h6>
+                    <p>{{answer.assentq2}}</p>
+                    <h6>3. Can you tell me what the benefits (or good things) are for this study?</h6>
+                    <p>{{answer.assentq3}}</p>
+                    <h6>4. Do you have other questions about any information that may not be clear?</h6>
+                    <p>{{answer.assentq4}}</p>
+                    <h6>5. I give permission for my interview to be video recorded.</h6>
+                    <p>{{answer.svideo}}</p>
+                    <h6>6. I have permission for my interview to be audio recorded.</h6>
+                    <p>{{answer.saudio}}</p>
+                    <h6>7. I give permission to be contacted in the future regarding this and other research.</h6>
+                    <p>{{answer.sfuture}}</p>
+                {% endfor %}
+            </div>
+            <div class="col-xs-4" style="color: blue;">
+                {% for answer in consentresponses %}
+                    <h5>Consent form responses:</h5>
+                    <h6>1. Can you tell me what we are asking you to do?</h6>
+                    <p>{{answer.consentq1}}</p>
+                    <h6>2. Can you tell me what the risks are for this study?</h6>
+                    <p>{{answer.consentq2}}</p>
+                    <h6>3. Can you tell me what the benefits are for this study?</h6>
+                    <p>{{answer.consentq3}}</p>
+                    <h6>4. Do you have other questions about any information that may not be clear?</h6>
+                    <p>{{answer.consentq4}}</p>
+                    <h6>5. I give permission for my interview to be video recorded.</h6>
+                    <p>{{answer.cvideo}}</p>
+                    <h6>6. I give permission for my interview to be audio recorded.</h6>
+                    <p>{{answer.caudio}}</p>
+                    <h6>7. I give permission to have pictures and video taken inside and outside of my house.</h6>
+                    <p>{{answer.cvideohouse}}</p>
+                    <h6>8. I give permission to have pictures and video taken inside my child(ren)'s room.</h6>
+                    <p>{{answer.cvideoroom}}</p>
+                    <h6>9. I give permission to have pictures and video taken of pictures of me and my child(ren).</h6>
+                    <p>{{answer.cvideome}}</p>
+                    <h6>10. I give permission to have pictures and video taken of items belonging to me and my child(ren).</h6>
+                    <p>{{answer.cvideocontents}}</p>
+                    <h6>11. I give permission to be contacted in the future regarding this and other research.</h6>
+                    <p>{{answer.cfuture}}</p>
+                {% endfor %}
+            </div>
+            <div class="col-xs-4" style="color: purple;">
+                {% for answer in stipendresponses %}
+                    <h5>Talent Release/W-9/VIF responses:</h5>
+                    <h6>1. Do you agree to the terms of the Talent Release Form?</h6>
+                    <p>{{answer.talent}}</p>
+                    <h6>2. Who would you like for the check to be made out to?</h6>
+                    <p>{{answer.payable}}</p>
+                    <h6>3. Payee's Date of birth:</h6>
+                    <p>{{answer.dateofbirth}}</p>
+                    <h6>4. Payee's Social Security Number:</h6>
+                    <p>{{answer.soc_sec}}</p>
+                    <h6>6. Is payee a United States (U.S.) citizen?</h6>
+                    <p>{{answer.citizen}}</p>
+                    <h6>7. Permanent Address:</h6>
+                    <p>{{participant.address}}, {{participant.city}}, {{participant.state}} {{participant.zip_code}}</p>
+                    <h6>8. Payment address:</h6>
+                    {% if answer.pmtaddr == "" %}
+                        <p>Use permanent address</p>
+                    {% else %}
+                        <p>{{answer.pmtaddr}}</p>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>
